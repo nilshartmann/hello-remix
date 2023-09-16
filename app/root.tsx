@@ -8,12 +8,15 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+import {useRenderedAt} from "~/useRenderedAt";
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
 ];
 
 export default function App() {
+  const renderedAt = useRenderedAt("Root");
+
   return (
     <html lang="en">
       <head>
@@ -23,7 +26,9 @@ export default function App() {
         <Links />
       </head>
       <body>
+        {renderedAt}
         <Outlet />
+
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
